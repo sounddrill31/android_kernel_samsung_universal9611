@@ -1861,6 +1861,54 @@ static int exynos_tmu_probe(struct platform_device *pdev)
 
 	INIT_WORK(&data->irq_work, exynos_tmu_work);
 
+	data->clk = devm_clk_get(&pdev->dev, "tmu_apbif");
+	if (IS_ERR(data->clk)) {
+		dev_err(&pdev->dev, "Failed to get clock\n");
+		ret = PTR_ERR(data->clk);
+		goto err_sensor;
+	}
+
+	data->clk_sec = devm_clk_get(&pdev->dev, "tmu_triminfo_apbif");
+	if (IS_ERR(data->clk_sec)) {
+		if (data->soc == SOC_ARCH_EXYNOS9610) {
+			dev_err(&pdev->dev, "Failed to get triminfo clock\n");
+			ret = PTR_ERR(data->clk_sec);
+			goto err_sensor;
+		}
+	} else {
+		ret = clk_prepare(data->clk_sec);
+		if (ret) {
+			dev_err(&pdev->dev, "Failed to get clock\n");
+			goto err_sensor;
+		}
+	}
+
+	ret = clk_prepare(data->clk);
+	if (ret) {
+		dev_err(&pdev->dev, "Failed to get clock\n");
+		goto err_clk_sec;
+	}
+
+	switch (data->soc) {
+	case SOC_ARCH_EXYNOS9610:
+	case SOC_ARCH_EXYNOS9810:
+		data->sclk = devm_clk_get(&pdev->dev, "tmu_sclk");
+		if (IS_ERR(data->sclk)) {
+			dev_err(&pdev->dev, "Failed to get sclk\n");
+			ret = PTR_ERR(data->sclk);
+			goto err_clk;
+		} else {
+			ret = clk_prepare_enable(data->sclk);
+			if (ret) {
+				dev_err(&pdev->dev, "Failed to enable sclk\n");
+				goto err_clk;
+			}
+		}
+		break;
+	default:
+		break;
+	}
+
 	/*
 	 * data->tzd must be registered before calling exynos_tmu_initialize(),
 	 * requesting irq and calling exynos_tmu_control().
@@ -1963,7 +2011,11 @@ static int exynos_tmu_probe(struct platform_device *pdev)
 #endif
 
 	return 0;
-
+err_clk:
+	clk_unprepare(data->clk);
+err_clk_sec:
+	if (!IS_ERR(data->clk_sec))
+		clk_unprepare(data->clk_sec);
 err_thermal:
 	thermal_zone_of_sensor_unregister(&pdev->dev, data->tzd);
 err_sensor:

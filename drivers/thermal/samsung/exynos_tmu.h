@@ -130,6 +130,7 @@ struct exynos_tmu_data {
 	enum soc_type soc;
 	struct work_struct irq_work;
 	struct mutex lock;
+	struct clk *clk, *clk_sec, *sclk;
 	u16 temp_error1, temp_error2;
 	struct thermal_zone_device *tzd;
 	unsigned int ntrip;
