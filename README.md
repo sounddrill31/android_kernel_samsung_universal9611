@@ -1,9 +1,9 @@
 
 <h1 align="center">
   <br>
-  <img src="https://i.ibb.co/LYYJzJC/logo.jpg" alt="Markdownify" width="2048">
+  <img src="https://i.ibb.co/8g82Gk4/Adobe-Express-20240326-1927380-1.png" alt="Markdownify" width="2048">
   <br>
-  GrassKernel
+  Cat Kernel
   <br>
 </h1>
 
@@ -26,20 +26,22 @@
 * Lot of debug codes/configuration Samsung added are removed.
 * Added [wireguard](https://www.wireguard.com/) driver, an open-source VPN driver in-kernel
 * Added [KernelSU](https://kernelsu.org/)
+* Added support for QPR2
+* Lastest kernel updates
 
 ## How To Build
 
-You will need ubuntu, git, around 8GB RAM and bla-bla-bla...
+You will need Linux(like debian or ubuntu 22.04), 15 GB HDD/SSD, 8 GB RAM, 6 Cores
 
 ```bash
 # Install dependencies
-$ sudo apt install -y bash git make libssl-dev curl bc pkg-config m4 libtool automake autoconf
+sudo apt install -y bash git make libssl-dev curl bc pkg-config m4 libtool automake autoconf
 
 # Clone this repository
-$ git clone https://github.com/Gojikovi/kernel_samsung_universal9611
+git clone https://github.com/Exynos9611Development/android_kernel_samsung_universal9611
 
 # Go into the repository
-$ cd kernel_samsung_universal9611
+$ cd android_kernel_samsung_universal9611
 
 # Install toolchain
 # You could try any clang/LLVM based toolchain, however I use neutron clang
@@ -62,9 +64,11 @@ This is your kernel. Just flash it via TWRP or adb sideload
 
 ## Credits
 
+- [Cat658011](https://github.com/cat658011)
+- [SoundDrill](https://github.com/sounddrill31)
+- [Onettboots](https://github.com/onettboots)
 - [roynatech2544](https://github.com/roynatech2544)
 - [Samsung Open Source](https://opensource.samsung.com/)
 - [Android Open Source Project](https://source.android.com/)
 - [The Linux Kernel](https://www.kernel.org/)
-
-
+- [OpenELA](https://https://openela.org)
