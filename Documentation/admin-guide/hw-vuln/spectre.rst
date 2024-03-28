@@ -468,7 +468,11 @@ Spectre variant 2
    before invoking any firmware code to prevent Spectre variant 2 exploits
    using the firmware.
 
+<<<<<<< HEAD
    Using kernel address space randomization (CONFIG_RANDOMIZE_SLAB=y
+=======
+   Using kernel address space randomization (CONFIG_RANDOMIZE_BASE=y
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
    and CONFIG_SLAB_FREELIST_RANDOM=y in the kernel configuration) makes
    attacks on the kernel generally more difficult.
 

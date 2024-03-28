@@ -3510,12 +3510,15 @@ static noinline int do_init_module(struct module *mod)
 	}
 	freeinit->module_init = mod->init_layout.base;
 
+<<<<<<< HEAD
 	/*
 	 * We want to find out whether @mod uses async during init.  Clear
 	 * PF_USED_ASYNC.  async_schedule*() will set it.
 	 */
 	current->flags &= ~PF_USED_ASYNC;
 
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	do_mod_ctors(mod);
 	/* Start the module */
 	if (mod->init != NULL)
@@ -3541,6 +3544,7 @@ static noinline int do_init_module(struct module *mod)
 
 	/*
 	 * We need to finish all async code before the module init sequence
+<<<<<<< HEAD
 	 * is done.  This has potential to deadlock.  For example, a newly
 	 * detected block device can trigger request_module() of the
 	 * default iosched from async probing task.  Once userland helper
@@ -3557,6 +3561,15 @@ static noinline int do_init_module(struct module *mod)
 	 * http://thread.gmane.org/gmane.linux.kernel/1420814
 	 */
 	if (!mod->async_probe_requested && (current->flags & PF_USED_ASYNC))
+=======
+	 * is done. This has potential to deadlock if synchronous module
+	 * loading is requested from async (which is not allowed!).
+	 *
+	 * See commit 0fdff3ec6d87 ("async, kmod: warn on synchronous
+	 * request_module() from async workers") for more details.
+	 */
+	if (!mod->async_probe_requested)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		async_synchronize_full();
 
 	mutex_lock(&module_mutex);

@@ -402,7 +402,11 @@ static void stm32_start_tx(struct uart_port *port)
 {
 	struct circ_buf *xmit = &port->state->xmit;
 
+<<<<<<< HEAD
 	if (uart_circ_empty(xmit))
+=======
+	if (uart_circ_empty(xmit) && !port->x_char)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		return;
 
 	stm32_transmit_chars(port);

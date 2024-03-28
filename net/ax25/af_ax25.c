@@ -80,6 +80,10 @@ static void ax25_kill_by_device(struct net_device *dev)
 {
 	ax25_dev *ax25_dev;
 	ax25_cb *s;
+<<<<<<< HEAD
+=======
+	struct sock *sk;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if ((ax25_dev = ax25_dev_ax25dev(dev)) == NULL)
 		return;
@@ -88,6 +92,7 @@ static void ax25_kill_by_device(struct net_device *dev)
 again:
 	ax25_for_each(s, &ax25_list) {
 		if (s->ax25_dev == ax25_dev) {
+<<<<<<< HEAD
 			spin_unlock_bh(&ax25_list_lock);
 			lock_sock(s->sk);
 			s->ax25_dev = NULL;
@@ -95,6 +100,17 @@ again:
 			ax25_disconnect(s, ENETUNREACH);
 			spin_lock_bh(&ax25_list_lock);
 
+=======
+			sk = s->sk;
+			sock_hold(sk);
+			spin_unlock_bh(&ax25_list_lock);
+			lock_sock(sk);
+			s->ax25_dev = NULL;
+			release_sock(sk);
+			ax25_disconnect(s, ENETUNREACH);
+			spin_lock_bh(&ax25_list_lock);
+			sock_put(sk);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			/* The entry could have been deleted from the
 			 * list meanwhile and thus the next pointer is
 			 * no longer valid.  Play it safe and restart

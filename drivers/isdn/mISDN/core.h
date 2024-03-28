@@ -69,8 +69,13 @@ struct Bprotocol	*get_Bprotocol4id(u_int);
 extern int	mISDN_inittimer(u_int *);
 extern void	mISDN_timer_cleanup(void);
 
+<<<<<<< HEAD
 extern int	l1_init(u_int *);
 extern void	l1_cleanup(void);
+=======
+extern int	Isdnl1_Init(u_int *);
+extern void	Isdnl1_cleanup(void);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 extern int	Isdnl2_Init(u_int *);
 extern void	Isdnl2_cleanup(void);
 

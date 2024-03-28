@@ -3183,6 +3183,10 @@ int hci_register_dev(struct hci_dev *hdev)
 	return id;
 
 err_wqueue:
+<<<<<<< HEAD
+=======
+	debugfs_remove_recursive(hdev->debugfs);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	destroy_workqueue(hdev->workqueue);
 	destroy_workqueue(hdev->req_workqueue);
 err:

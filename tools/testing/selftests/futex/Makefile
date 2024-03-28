@@ -11,7 +11,11 @@ all:
 	@for DIR in $(SUBDIRS); do		\
 		BUILD_TARGET=$(OUTPUT)/$$DIR;	\
 		mkdir $$BUILD_TARGET  -p;	\
+<<<<<<< HEAD
 		make OUTPUT=$$BUILD_TARGET -C $$DIR $@;\
+=======
+		$(MAKE) OUTPUT=$$BUILD_TARGET -C $$DIR $@;\
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		if [ -e $$DIR/$(TEST_PROGS) ]; then \
 			rsync -a $$DIR/$(TEST_PROGS) $$BUILD_TARGET/; \
 		fi \
@@ -40,6 +44,10 @@ override define CLEAN
 	@for DIR in $(SUBDIRS); do		\
 		BUILD_TARGET=$(OUTPUT)/$$DIR;	\
 		mkdir $$BUILD_TARGET  -p;	\
+<<<<<<< HEAD
 		make OUTPUT=$$BUILD_TARGET -C $$DIR $@;\
+=======
+		$(MAKE) OUTPUT=$$BUILD_TARGET -C $$DIR $@;\
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	done
 endef

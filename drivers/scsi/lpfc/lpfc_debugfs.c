@@ -2177,8 +2177,13 @@ lpfc_debugfs_nvmeio_trc_write(struct file *file, const char __user *buf,
 	char mybuf[64];
 	char *pbuf;
 
+<<<<<<< HEAD
 	if (nbytes > 64)
 		nbytes = 64;
+=======
+	if (nbytes > 63)
+		nbytes = 63;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	memset(mybuf, 0, sizeof(mybuf));
 

@@ -635,6 +635,11 @@ try_again:
 	if (host->ops->init_card)
 		host->ops->init_card(host, card);
 
+<<<<<<< HEAD
+=======
+	card->ocr = ocr_card;
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	/*
 	 * If the host and card support UHS-I mode request the card
 	 * to switch to 1.8V signaling level.  No 1.8v signalling if
@@ -757,7 +762,11 @@ try_again:
 
 		card = oldcard;
 	}
+<<<<<<< HEAD
 	card->ocr = ocr_card;
+=======
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	mmc_fixup_device(card, sdio_fixup_methods);
 
 	if (card->type == MMC_TYPE_SD_COMBO) {

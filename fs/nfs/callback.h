@@ -168,7 +168,11 @@ struct cb_devicenotifyitem {
 };
 
 struct cb_devicenotifyargs {
+<<<<<<< HEAD
 	int				 ndevs;
+=======
+	uint32_t			 ndevs;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	struct cb_devicenotifyitem	 *devs;
 };
 

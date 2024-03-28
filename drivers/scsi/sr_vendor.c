@@ -119,7 +119,11 @@ int sr_set_blocklength(Scsi_CD *cd, int blocklength)
 		density = (blocklength > 2048) ? 0x81 : 0x83;
 #endif
 
+<<<<<<< HEAD
 	buffer = kmalloc(512, GFP_KERNEL | GFP_DMA);
+=======
+	buffer = kmalloc(512, GFP_KERNEL);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if (!buffer)
 		return -ENOMEM;
 
@@ -167,7 +171,11 @@ int sr_cd_check(struct cdrom_device_info *cdi)
 	if (cd->cdi.mask & CDC_MULTI_SESSION)
 		return 0;
 
+<<<<<<< HEAD
 	buffer = kmalloc(512, GFP_KERNEL | GFP_DMA);
+=======
+	buffer = kmalloc(512, GFP_KERNEL);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if (!buffer)
 		return -ENOMEM;
 

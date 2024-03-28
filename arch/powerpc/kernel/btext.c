@@ -258,8 +258,15 @@ int __init btext_find_display(int allow_nonstdout)
 			rc = btext_initialize(np);
 			printk("result: %d\n", rc);
 		}
+<<<<<<< HEAD
 		if (rc == 0)
 			break;
+=======
+		if (rc == 0) {
+			of_node_put(np);
+			break;
+		}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 	return rc;
 }

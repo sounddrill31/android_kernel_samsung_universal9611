@@ -4603,6 +4603,10 @@ static const struct ata_blacklist_entry ata_device_blacklist [] = {
 
 	/* devices that don't properly handle TRIM commands */
 	{ "SuperSSpeed S238*",		NULL,	ATA_HORKAGE_NOTRIM, },
+<<<<<<< HEAD
+=======
+	{ "M88V29*",			NULL,	ATA_HORKAGE_NOTRIM, },
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	/*
 	 * As defined, the DRAT (Deterministic Read After Trim) and RZAT

@@ -89,7 +89,11 @@ static int si2157_init(struct dvb_frontend *fe)
 	dev_dbg(&client->dev, "\n");
 
 	/* Try to get Xtal trim property, to verify tuner still running */
+<<<<<<< HEAD
 	memcpy(cmd.args, "\x15\x00\x04\x02", 4);
+=======
+	memcpy(cmd.args, "\x15\x00\x02\x04", 4);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	cmd.wlen = 4;
 	cmd.rlen = 4;
 	ret = si2157_cmd_execute(client, &cmd);

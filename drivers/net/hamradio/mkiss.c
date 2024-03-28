@@ -41,6 +41,11 @@
 
 #define AX_MTU		236
 
+<<<<<<< HEAD
+=======
+/* some arch define END as assembly function ending, just undef it */
+#undef	END
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 /* SLIP/KISS protocol characters. */
 #define END             0300		/* indicates end of frame	*/
 #define ESC             0333		/* indicates byte stuffing	*/

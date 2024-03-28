@@ -206,6 +206,10 @@ static void ftdi_elan_delete(struct kref *kref)
 	mutex_unlock(&ftdi_module_lock);
 	kfree(ftdi->bulk_in_buffer);
 	ftdi->bulk_in_buffer = NULL;
+<<<<<<< HEAD
+=======
+	kfree(ftdi);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 static void ftdi_elan_put_kref(struct usb_ftdi *ftdi)

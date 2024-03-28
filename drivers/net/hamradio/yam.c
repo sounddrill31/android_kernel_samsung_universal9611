@@ -980,9 +980,13 @@ static int yam_ioctl(struct net_device *dev, struct ifreq *ifr, int cmd)
 				 sizeof(struct yamdrv_ioctl_mcs));
 		if (IS_ERR(ym))
 			return PTR_ERR(ym);
+<<<<<<< HEAD
 		if (ym->cmd != SIOCYAMSMCS)
 			return -EINVAL;
 		if (ym->bitrate > YAM_MAXBITRATE) {
+=======
+		if (ym->cmd != SIOCYAMSMCS || ym->bitrate > YAM_MAXBITRATE) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			kfree(ym);
 			return -EINVAL;
 		}

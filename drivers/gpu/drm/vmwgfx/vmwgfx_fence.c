@@ -1150,7 +1150,11 @@ int vmw_fence_event_ioctl(struct drm_device *dev, void *data,
 	}
 
 	vmw_execbuf_copy_fence_user(dev_priv, vmw_fp, 0, user_fence_rep, fence,
+<<<<<<< HEAD
 				    handle, -1, NULL);
+=======
+				    handle, -1);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	vmw_fence_obj_unreference(&fence);
 	return 0;
 out_no_create:

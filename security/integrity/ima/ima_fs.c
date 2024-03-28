@@ -486,11 +486,18 @@ int __init ima_fs_init(void)
 
 	return 0;
 out:
+<<<<<<< HEAD
+=======
+	securityfs_remove(ima_policy);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	securityfs_remove(violations);
 	securityfs_remove(runtime_measurements_count);
 	securityfs_remove(ascii_runtime_measurements);
 	securityfs_remove(binary_runtime_measurements);
 	securityfs_remove(ima_dir);
+<<<<<<< HEAD
 	securityfs_remove(ima_policy);
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	return -1;
 }

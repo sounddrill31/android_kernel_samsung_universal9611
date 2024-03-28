@@ -410,7 +410,11 @@ static int sr9700_rx_fixup(struct usbnet *dev, struct sk_buff *skb)
 		/* ignore the CRC length */
 		len = (skb->data[1] | (skb->data[2] << 8)) - 4;
 
+<<<<<<< HEAD
 		if (len > ETH_FRAME_LEN)
+=======
+		if (len > ETH_FRAME_LEN || len > skb->len)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			return 0;
 
 		/* the last packet of current skb */

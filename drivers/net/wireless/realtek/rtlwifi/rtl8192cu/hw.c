@@ -1020,6 +1020,10 @@ int rtl92cu_hw_init(struct ieee80211_hw *hw)
 	_InitPABias(hw);
 	rtl92c_dm_init(hw);
 exit:
+<<<<<<< HEAD
+=======
+	local_irq_disable();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	local_irq_restore(flags);
 	return err;
 }

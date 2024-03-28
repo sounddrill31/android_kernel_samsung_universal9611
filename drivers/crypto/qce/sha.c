@@ -544,8 +544,13 @@ static int qce_ahash_register_one(const struct qce_ahash_def *def,
 
 	ret = crypto_register_ahash(alg);
 	if (ret) {
+<<<<<<< HEAD
 		kfree(tmpl);
 		dev_err(qce->dev, "%s registration failed\n", base->cra_name);
+=======
+		dev_err(qce->dev, "%s registration failed\n", base->cra_name);
+		kfree(tmpl);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		return ret;
 	}
 

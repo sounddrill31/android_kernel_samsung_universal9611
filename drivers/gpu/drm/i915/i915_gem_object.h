@@ -135,6 +135,10 @@ struct drm_i915_gem_object {
 	 * activity?
 	 */
 #define I915_BO_ACTIVE_REF 0
+<<<<<<< HEAD
+=======
+#define I915_BO_WAS_BOUND_BIT    1
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	/*
 	 * Is the object to be mapped as read-only to the GPU

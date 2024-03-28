@@ -118,8 +118,15 @@ static dma_cookie_t shdma_tx_submit(struct dma_async_tx_descriptor *tx)
 		ret = pm_runtime_get(schan->dev);
 
 		spin_unlock_irq(&schan->chan_lock);
+<<<<<<< HEAD
 		if (ret < 0)
 			dev_err(schan->dev, "%s(): GET = %d\n", __func__, ret);
+=======
+		if (ret < 0) {
+			dev_err(schan->dev, "%s(): GET = %d\n", __func__, ret);
+			pm_runtime_put(schan->dev);
+		}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 		pm_runtime_barrier(schan->dev);
 

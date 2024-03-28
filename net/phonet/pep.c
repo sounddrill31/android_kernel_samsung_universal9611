@@ -881,6 +881,10 @@ static struct sock *pep_sock_accept(struct sock *sk, int flags, int *errp,
 
 	err = pep_accept_conn(newsk, skb);
 	if (err) {
+<<<<<<< HEAD
+=======
+		__sock_put(sk);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		sock_put(newsk);
 		newsk = NULL;
 		goto drop;

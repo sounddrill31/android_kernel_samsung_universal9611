@@ -442,6 +442,10 @@ acpi_ut_update_ref_count(union acpi_operand_object *object, u32 action)
 			ACPI_WARNING((AE_INFO,
 				      "Obj %p, Reference Count is already zero, cannot decrement\n",
 				      object));
+<<<<<<< HEAD
+=======
+			return;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		}
 
 		ACPI_DEBUG_PRINT((ACPI_DB_ALLOCATIONS,

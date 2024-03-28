@@ -813,8 +813,13 @@ static void do_numa_crng_init(struct work_struct *work)
 		crng_initialize(crng);
 		pool[i] = crng;
 	}
+<<<<<<< HEAD
 	mb();
 	if (cmpxchg(&crng_node_pool, NULL, pool)) {
+=======
+	/* pairs with READ_ONCE() in select_crng() */
+	if (cmpxchg_release(&crng_node_pool, NULL, pool) != NULL) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		for_each_node(i)
 			kfree(pool[i]);
 		kfree(pool);
@@ -827,8 +832,31 @@ static void numa_crng_init(void)
 {
 	schedule_work(&numa_crng_init_work);
 }
+<<<<<<< HEAD
 #else
 static void numa_crng_init(void) {}
+=======
+
+static struct crng_state *select_crng(void)
+{
+	struct crng_state **pool;
+	int nid = numa_node_id();
+
+	/* pairs with cmpxchg_release() in do_numa_crng_init() */
+	pool = READ_ONCE(crng_node_pool);
+	if (pool && pool[nid])
+		return pool[nid];
+
+	return &primary_crng;
+}
+#else
+static void numa_crng_init(void) {}
+
+static struct crng_state *select_crng(void)
+{
+	return &primary_crng;
+}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 #endif
 
 /*
@@ -933,7 +961,11 @@ static void crng_reseed(struct crng_state *crng, struct entropy_store *r)
 		crng->state[i+4] ^= buf.key[i] ^ rv;
 	}
 	memzero_explicit(&buf, sizeof(buf));
+<<<<<<< HEAD
 	crng->init_time = jiffies;
+=======
+	WRITE_ONCE(crng->init_time, jiffies);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	spin_unlock_irqrestore(&crng->lock, flags);
 	if (crng == &primary_crng && crng_init < 2) {
 		invalidate_batched_entropy();
@@ -960,12 +992,24 @@ static void crng_reseed(struct crng_state *crng, struct entropy_store *r)
 static void _extract_crng(struct crng_state *crng,
 			  __u8 out[CHACHA_BLOCK_SIZE])
 {
+<<<<<<< HEAD
 	unsigned long v, flags;
 
 	if (crng_ready() &&
 	    (time_after(crng_global_init_time, crng->init_time) ||
 	     time_after(jiffies, crng->init_time + CRNG_RESEED_INTERVAL)))
 		crng_reseed(crng, crng == &primary_crng ? &input_pool : NULL);
+=======
+	unsigned long v, flags, init_time;
+
+	if (crng_ready()) {
+		init_time = READ_ONCE(crng->init_time);
+		if (time_after(READ_ONCE(crng_global_init_time), init_time) ||
+		    time_after(jiffies, init_time + CRNG_RESEED_INTERVAL))
+			crng_reseed(crng, crng == &primary_crng ?
+				    &input_pool : NULL);
+	}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	spin_lock_irqsave(&crng->lock, flags);
 	if (arch_get_random_long(&v))
 		crng->state[14] ^= v;
@@ -977,6 +1021,7 @@ static void _extract_crng(struct crng_state *crng,
 
 static void extract_crng(__u8 out[CHACHA_BLOCK_SIZE])
 {
+<<<<<<< HEAD
 	struct crng_state *crng = NULL;
 
 #ifdef CONFIG_NUMA
@@ -986,6 +1031,9 @@ static void extract_crng(__u8 out[CHACHA_BLOCK_SIZE])
 #endif
 		crng = &primary_crng;
 	_extract_crng(crng, out);
+=======
+	_extract_crng(select_crng(), out);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 /*
@@ -1014,6 +1062,7 @@ static void _crng_backtrack_protect(struct crng_state *crng,
 
 static void crng_backtrack_protect(__u8 tmp[CHACHA_BLOCK_SIZE], int used)
 {
+<<<<<<< HEAD
 	struct crng_state *crng = NULL;
 
 #ifdef CONFIG_NUMA
@@ -1023,6 +1072,9 @@ static void crng_backtrack_protect(__u8 tmp[CHACHA_BLOCK_SIZE], int used)
 #endif
 		crng = &primary_crng;
 	_crng_backtrack_protect(crng, tmp, used);
+=======
+	_crng_backtrack_protect(select_crng(), tmp, used);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 static ssize_t extract_crng_user(void __user *buf, size_t nbytes)
@@ -1985,7 +2037,11 @@ static long random_ioctl(struct file *f, unsigned int cmd, unsigned long arg)
 		if (crng_init < 2)
 			return -ENODATA;
 		crng_reseed(&primary_crng, &input_pool);
+<<<<<<< HEAD
 		crng_global_init_time = jiffies - 1;
+=======
+		WRITE_ONCE(crng_global_init_time, jiffies - 1);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		return 0;
 	default:
 		return -EINVAL;

@@ -1680,8 +1680,16 @@ void snd_hda_ctls_clear(struct hda_codec *codec)
 {
 	int i;
 	struct hda_nid_item *items = codec->mixers.list;
+<<<<<<< HEAD
 	for (i = 0; i < codec->mixers.used; i++)
 		snd_ctl_remove(codec->card, items[i].kctl);
+=======
+
+	down_write(&codec->card->controls_rwsem);
+	for (i = 0; i < codec->mixers.used; i++)
+		snd_ctl_remove(codec->card, items[i].kctl);
+	up_write(&codec->card->controls_rwsem);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	snd_array_free(&codec->mixers);
 	snd_array_free(&codec->nids);
 }

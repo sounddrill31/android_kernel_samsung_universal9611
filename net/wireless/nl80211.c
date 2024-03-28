@@ -11264,6 +11264,12 @@ static int handle_nan_filter(struct nlattr *attr_filter,
 	i = 0;
 	nla_for_each_nested(attr, attr_filter, rem) {
 		filter[i].filter = nla_memdup(attr, GFP_KERNEL);
+<<<<<<< HEAD
+=======
+		if (!filter[i].filter)
+			goto err;
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		filter[i].len = nla_len(attr);
 		i++;
 	}
@@ -11276,6 +11282,18 @@ static int handle_nan_filter(struct nlattr *attr_filter,
 	}
 
 	return 0;
+<<<<<<< HEAD
+=======
+
+err:
+	i = 0;
+	nla_for_each_nested(attr, attr_filter, rem) {
+		kfree(filter[i].filter);
+		i++;
+	}
+	kfree(filter);
+	return -ENOMEM;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 static int nl80211_nan_add_func(struct sk_buff *skb,

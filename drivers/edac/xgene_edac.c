@@ -1934,7 +1934,11 @@ static int xgene_edac_probe(struct platform_device *pdev)
 			irq = platform_get_irq(pdev, i);
 			if (irq < 0) {
 				dev_err(&pdev->dev, "No IRQ resource\n");
+<<<<<<< HEAD
 				rc = -EINVAL;
+=======
+				rc = irq;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 				goto out_err;
 			}
 			rc = devm_request_irq(&pdev->dev, irq,

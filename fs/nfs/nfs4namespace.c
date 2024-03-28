@@ -121,8 +121,13 @@ static int nfs4_validate_fspath(struct dentry *dentry,
 	return 0;
 }
 
+<<<<<<< HEAD
 static size_t nfs_parse_server_name(char *string, size_t len,
 		struct sockaddr *sa, size_t salen, struct net *net)
+=======
+size_t nfs_parse_server_name(char *string, size_t len, struct sockaddr *sa,
+			     size_t salen, struct net *net)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 {
 	ssize_t ret;
 

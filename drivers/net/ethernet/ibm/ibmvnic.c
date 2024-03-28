@@ -3691,12 +3691,15 @@ static void ibmvnic_tasklet(void *data)
 			ibmvnic_handle_crq(crq, adapter);
 			crq->generic.first = 0;
 		}
+<<<<<<< HEAD
 
 		/* remain in tasklet until all
 		 * capabilities responses are received
 		 */
 		if (!adapter->wait_capability)
 			done = true;
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 	/* if capabilities CRQ's were sent in this tasklet, the following
 	 * tasklet must wait until all responses are received

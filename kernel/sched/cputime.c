@@ -169,10 +169,17 @@ void account_guest_time(struct task_struct *p, u64 cputime)
 
 	/* Add guest time to cpustat. */
 	if (task_nice(p) > 0) {
+<<<<<<< HEAD
 		cpustat[CPUTIME_NICE] += cputime;
 		cpustat[CPUTIME_GUEST_NICE] += cputime;
 	} else {
 		cpustat[CPUTIME_USER] += cputime;
+=======
+		task_group_account_field(p, CPUTIME_NICE, cputime);
+		cpustat[CPUTIME_GUEST_NICE] += cputime;
+	} else {
+		task_group_account_field(p, CPUTIME_USER, cputime);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		cpustat[CPUTIME_GUEST] += cputime;
 	}
 }

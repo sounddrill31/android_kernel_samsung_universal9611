@@ -559,7 +559,11 @@ static int write_packet(struct usb_device *udev,
 			       0,	/* index */
 			       buf,	/* buffer */
 			       size,
+<<<<<<< HEAD
 			       HZ);
+=======
+			       1000);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	kfree(buf);
 	return ret;
@@ -591,7 +595,11 @@ static int read_packet(struct usb_device *udev,
 			       0,	/* index */
 			       buf,	/* buffer */
 			       size,
+<<<<<<< HEAD
 			       HZ);
+=======
+			       1000);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if (ret >= 0)
 		memcpy(registers, buf, size);

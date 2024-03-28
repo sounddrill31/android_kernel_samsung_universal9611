@@ -929,6 +929,11 @@ static int atp_probe(struct usb_interface *iface,
 	set_bit(BTN_TOOL_TRIPLETAP, input_dev->keybit);
 	set_bit(BTN_LEFT, input_dev->keybit);
 
+<<<<<<< HEAD
+=======
+	INIT_WORK(&dev->work, atp_reinit);
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	error = input_register_device(dev->input);
 	if (error)
 		goto err_free_buffer;
@@ -936,8 +941,11 @@ static int atp_probe(struct usb_interface *iface,
 	/* save our data pointer in this interface device */
 	usb_set_intfdata(iface, dev);
 
+<<<<<<< HEAD
 	INIT_WORK(&dev->work, atp_reinit);
 
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	return 0;
 
  err_free_buffer:

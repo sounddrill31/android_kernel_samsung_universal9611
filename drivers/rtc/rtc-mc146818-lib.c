@@ -82,7 +82,11 @@ unsigned int mc146818_get_time(struct rtc_time *time)
 	time->tm_year += real_year - 72;
 #endif
 
+<<<<<<< HEAD
 	if (century > 20)
+=======
+	if (century > 19)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		time->tm_year += (century - 19) * 100;
 
 	/*

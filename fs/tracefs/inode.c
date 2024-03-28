@@ -265,7 +265,10 @@ static int tracefs_parse_options(char *data, struct tracefs_mount_opts *opts)
 			if (!gid_valid(gid))
 				return -EINVAL;
 			opts->gid = gid;
+<<<<<<< HEAD
 			set_gid(tracefs_mount->mnt_root, gid);
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			break;
 		case Opt_mode:
 			if (match_octal(&args[0], &option))
@@ -292,7 +295,13 @@ static int tracefs_apply_options(struct super_block *sb)
 	inode->i_mode |= opts->mode;
 
 	inode->i_uid = opts->uid;
+<<<<<<< HEAD
 	inode->i_gid = opts->gid;
+=======
+
+	/* Set all the group ids to the mount option */
+	set_gid(sb->s_root, opts->gid);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	return 0;
 }

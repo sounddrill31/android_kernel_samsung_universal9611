@@ -304,7 +304,11 @@ static int softingcs_probe(struct pcmcia_device *pcmcia)
 	return 0;
 
 platform_failed:
+<<<<<<< HEAD
 	kfree(dev);
+=======
+	platform_device_put(pdev);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 mem_failed:
 pcmcia_bad:
 pcmcia_failed:

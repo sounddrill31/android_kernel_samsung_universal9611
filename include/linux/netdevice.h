@@ -2206,6 +2206,10 @@ struct packet_type {
 					 struct net_device *);
 	bool			(*id_match)(struct packet_type *ptype,
 					    struct sock *sk);
+<<<<<<< HEAD
+=======
+	struct net		*af_packet_net;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	void			*af_packet_priv;
 	struct list_head	list;
 };

@@ -288,7 +288,11 @@ static bool tipc_update_nametbl(struct net *net, struct distr_item *i,
 			return true;
 		}
 	} else {
+<<<<<<< HEAD
 		pr_warn("Unrecognized name table message received\n");
+=======
+		pr_warn_ratelimited("Unknown name table message received\n");
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 	return false;
 }

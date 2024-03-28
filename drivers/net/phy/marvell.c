@@ -907,16 +907,26 @@ static int m88e1118_config_aneg(struct phy_device *phydev)
 {
 	int err;
 
+<<<<<<< HEAD
 	err = genphy_soft_reset(phydev);
 	if (err < 0)
 		return err;
 
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	err = marvell_set_polarity(phydev, phydev->mdix_ctrl);
 	if (err < 0)
 		return err;
 
 	err = genphy_config_aneg(phydev);
+<<<<<<< HEAD
 	return 0;
+=======
+	if (err < 0)
+		return err;
+
+	return genphy_soft_reset(phydev);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 static int m88e1118_config_init(struct phy_device *phydev)
@@ -938,6 +948,15 @@ static int m88e1118_config_init(struct phy_device *phydev)
 	if (err < 0)
 		return err;
 
+<<<<<<< HEAD
+=======
+	if (phy_interface_is_rgmii(phydev)) {
+		err = m88e1121_config_aneg_rgmii_delays(phydev);
+		if (err < 0)
+			return err;
+	}
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	/* Adjust LED Control */
 	if (phydev->dev_flags & MARVELL_PHY_M1118_DNS323_LEDS)
 		err = phy_write(phydev, 0x10, 0x1100);

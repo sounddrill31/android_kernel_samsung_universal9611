@@ -138,8 +138,15 @@ static void ops_exit_list(const struct pernet_operations *ops,
 {
 	struct net *net;
 	if (ops->exit) {
+<<<<<<< HEAD
 		list_for_each_entry(net, net_exit_list, exit_list)
 			ops->exit(net);
+=======
+		list_for_each_entry(net, net_exit_list, exit_list) {
+			ops->exit(net);
+			cond_resched();
+		}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 	if (ops->exit_batch)
 		ops->exit_batch(net_exit_list);

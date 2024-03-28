@@ -9,6 +9,11 @@
  *
  */
 
+<<<<<<< HEAD
+=======
+#include <dt-bindings/gpio/gpio.h>
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 / {
 	aliases {
 		backlight = &backlight;
@@ -201,6 +206,10 @@
 				MX6QDL_PAD_SD3_DAT1__SD3_DATA1		0x17059
 				MX6QDL_PAD_SD3_DAT2__SD3_DATA2		0x17059
 				MX6QDL_PAD_SD3_DAT3__SD3_DATA3		0x17059
+<<<<<<< HEAD
+=======
+				MX6QDL_PAD_SD3_DAT5__GPIO7_IO00		0x1b0b0
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			>;
 		};
 
@@ -267,7 +276,11 @@
 &usdhc3 {
 	pinctrl-names = "default";
 	pinctrl-0 = <&pinctrl_usdhc3>;
+<<<<<<< HEAD
 	non-removable;
+=======
+	cd-gpios = <&gpio7 0 GPIO_ACTIVE_LOW>;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	status = "okay";
 };
 

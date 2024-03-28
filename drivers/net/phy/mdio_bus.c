@@ -392,7 +392,11 @@ int __mdiobus_register(struct mii_bus *bus, struct module *owner)
 	mdiobus_setup_mdiodev_from_board_info(bus, mdiobus_create_device);
 
 	bus->state = MDIOBUS_REGISTERED;
+<<<<<<< HEAD
 	pr_info("%s: probed\n", bus->name);
+=======
+	dev_dbg(&bus->dev, "probed\n");
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	return 0;
 
 error:

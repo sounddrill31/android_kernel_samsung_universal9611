@@ -992,8 +992,15 @@ pdcs_register_pathentries(void)
 		entry->kobj.kset = paths_kset;
 		err = kobject_init_and_add(&entry->kobj, &ktype_pdcspath, NULL,
 					   "%s", entry->name);
+<<<<<<< HEAD
 		if (err)
 			return err;
+=======
+		if (err) {
+			kobject_put(&entry->kobj);
+			return err;
+		}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 		/* kobject is now registered */
 		write_lock(&entry->rw_lock);

@@ -4476,8 +4476,15 @@ static struct dvb_frontend *dib8000_init(struct i2c_adapter *i2c_adap, u8 i2c_ad
 
 	state->timf_default = cfg->pll->timf;
 
+<<<<<<< HEAD
 	if (dib8000_identify(&state->i2c) == 0)
 		goto error;
+=======
+	if (dib8000_identify(&state->i2c) == 0) {
+		kfree(fe);
+		goto error;
+	}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	dibx000_init_i2c_master(&state->i2c_master, DIB8000, state->i2c.adap, state->i2c.addr);
 

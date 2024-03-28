@@ -45,7 +45,10 @@ zram_set_memlimit
 zram_makeswap
 zram_swapoff
 zram_cleanup
+<<<<<<< HEAD
 zram_unload
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 if [ $ERR_CODE -ne 0 ]; then
 	echo "$TCID : [FAIL]"

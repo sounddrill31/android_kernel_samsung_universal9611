@@ -753,6 +753,10 @@ cifs_do_mount(struct file_system_type *fs_type,
 
 out_super:
 	deactivate_locked_super(sb);
+<<<<<<< HEAD
+=======
+	return root;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 out:
 	cifs_cleanup_volume_info(volume_info);
 	return root;

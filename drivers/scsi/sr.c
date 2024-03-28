@@ -885,7 +885,11 @@ static void get_capabilities(struct scsi_cd *cd)
 
 
 	/* allocate transfer buffer */
+<<<<<<< HEAD
 	buffer = kmalloc(512, GFP_KERNEL | GFP_DMA);
+=======
+	buffer = kmalloc(512, GFP_KERNEL);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if (!buffer) {
 		sr_printk(KERN_ERR, cd, "out of memory.\n");
 		return;

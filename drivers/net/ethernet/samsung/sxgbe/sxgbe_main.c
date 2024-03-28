@@ -2282,18 +2282,30 @@ static int __init sxgbe_cmdline_opt(char *str)
 	char *opt;
 
 	if (!str || !*str)
+<<<<<<< HEAD
 		return -EINVAL;
+=======
+		return 1;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	while ((opt = strsep(&str, ",")) != NULL) {
 		if (!strncmp(opt, "eee_timer:", 10)) {
 			if (kstrtoint(opt + 10, 0, &eee_timer))
 				goto err;
 		}
 	}
+<<<<<<< HEAD
 	return 0;
 
 err:
 	pr_err("%s: ERROR broken module parameter conversion\n", __func__);
 	return -EINVAL;
+=======
+	return 1;
+
+err:
+	pr_err("%s: ERROR broken module parameter conversion\n", __func__);
+	return 1;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 __setup("sxgbeeth=", sxgbe_cmdline_opt);

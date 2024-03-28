@@ -2070,7 +2070,11 @@ static int snd_pcm_oss_set_trigger(struct snd_pcm_oss_file *pcm_oss_file, int tr
 	int err, cmd;
 
 #ifdef OSS_DEBUG
+<<<<<<< HEAD
 	pcm_dbg(substream->pcm, "pcm_oss: trigger = 0x%x\n", trigger);
+=======
+	pr_debug("pcm_oss: trigger = 0x%x\n", trigger);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 #endif
 	
 	psubstream = pcm_oss_file->streams[SNDRV_PCM_STREAM_PLAYBACK];

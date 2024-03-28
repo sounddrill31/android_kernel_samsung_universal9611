@@ -30,7 +30,11 @@ static int __init serial_init_chip(struct parisc_device *dev)
 	unsigned long address;
 	int err;
 
+<<<<<<< HEAD
 #ifdef CONFIG_64BIT
+=======
+#if defined(CONFIG_64BIT) && defined(CONFIG_IOSAPIC)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if (!dev->irq && (dev->id.sversion == 0xad))
 		dev->irq = iosapic_serial_irq(dev);
 #endif

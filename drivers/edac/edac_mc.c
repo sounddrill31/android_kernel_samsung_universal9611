@@ -264,7 +264,11 @@ void *edac_align_ptr(void **p, unsigned size, int n_elems)
 	else
 		return (char *)ptr;
 
+<<<<<<< HEAD
 	r = (unsigned long)p % align;
+=======
+	r = (unsigned long)ptr % align;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if (r == 0)
 		return (char *)ptr;

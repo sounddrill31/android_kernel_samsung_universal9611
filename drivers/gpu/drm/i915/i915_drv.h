@@ -2166,6 +2166,11 @@ struct drm_i915_private {
 
 	struct intel_uncore uncore;
 
+<<<<<<< HEAD
+=======
+	struct mutex tlb_invalidate_lock;
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	struct i915_virtual_gpu vgpu;
 
 	struct intel_gvt *gvt;

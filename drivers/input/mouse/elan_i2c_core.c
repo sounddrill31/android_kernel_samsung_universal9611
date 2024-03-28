@@ -137,11 +137,16 @@ static int elan_get_fwinfo(u16 ic_type, u16 *validpage_count,
 	return 0;
 }
 
+<<<<<<< HEAD
 static int elan_enable_power(struct elan_tp_data *data)
+=======
+static int elan_set_power(struct elan_tp_data *data, bool on)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 {
 	int repeat = ETP_RETRY_COUNT;
 	int error;
 
+<<<<<<< HEAD
 	error = regulator_enable(data->vcc);
 	if (error) {
 		dev_err(&data->client->dev,
@@ -151,12 +156,17 @@ static int elan_enable_power(struct elan_tp_data *data)
 
 	do {
 		error = data->ops->power_control(data->client, true);
+=======
+	do {
+		error = data->ops->power_control(data->client, on);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		if (error >= 0)
 			return 0;
 
 		msleep(30);
 	} while (--repeat > 0);
 
+<<<<<<< HEAD
 	dev_err(&data->client->dev, "failed to enable power: %d\n", error);
 	return error;
 }
@@ -186,6 +196,10 @@ static int elan_disable_power(struct elan_tp_data *data)
 	} while (--repeat > 0);
 
 	dev_err(&data->client->dev, "failed to disable power: %d\n", error);
+=======
+	dev_err(&data->client->dev, "failed to set power %s: %d\n",
+		on ? "on" : "off", error);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	return error;
 }
 
@@ -1206,9 +1220,25 @@ static int __maybe_unused elan_suspend(struct device *dev)
 		/* Enable wake from IRQ */
 		data->irq_wake = (enable_irq_wake(client->irq) == 0);
 	} else {
+<<<<<<< HEAD
 		ret = elan_disable_power(data);
 	}
 
+=======
+		ret = elan_set_power(data, false);
+		if (ret)
+			goto err;
+
+		ret = regulator_disable(data->vcc);
+		if (ret) {
+			dev_err(dev, "error %d disabling regulator\n", ret);
+			/* Attempt to power the chip back up */
+			elan_set_power(data, true);
+		}
+	}
+
+err:
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	mutex_unlock(&data->sysfs_mutex);
 	return ret;
 }
@@ -1219,12 +1249,26 @@ static int __maybe_unused elan_resume(struct device *dev)
 	struct elan_tp_data *data = i2c_get_clientdata(client);
 	int error;
 
+<<<<<<< HEAD
 	if (device_may_wakeup(dev) && data->irq_wake) {
+=======
+	if (!device_may_wakeup(dev)) {
+		error = regulator_enable(data->vcc);
+		if (error) {
+			dev_err(dev, "error %d enabling regulator\n", error);
+			goto err;
+		}
+	} else if (data->irq_wake) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		disable_irq_wake(client->irq);
 		data->irq_wake = false;
 	}
 
+<<<<<<< HEAD
 	error = elan_enable_power(data);
+=======
+	error = elan_set_power(data, true);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if (error) {
 		dev_err(dev, "power up when resuming failed: %d\n", error);
 		goto err;

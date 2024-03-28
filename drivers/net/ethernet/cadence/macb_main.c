@@ -3528,7 +3528,11 @@ static int macb_probe(struct platform_device *pdev)
 
 #ifdef CONFIG_ARCH_DMA_ADDR_T_64BIT
 	if (GEM_BFEXT(DAW64, gem_readl(bp, DCFG6))) {
+<<<<<<< HEAD
 		dma_set_mask(&pdev->dev, DMA_BIT_MASK(44));
+=======
+		dma_set_mask_and_coherent(&pdev->dev, DMA_BIT_MASK(44));
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		bp->hw_dma_cap |= HW_DMA_CAP_64B;
 	}
 #endif

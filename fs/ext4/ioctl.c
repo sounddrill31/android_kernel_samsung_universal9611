@@ -992,8 +992,11 @@ resizefs_out:
 		    sizeof(range)))
 			return -EFAULT;
 
+<<<<<<< HEAD
 		range.minlen = max((unsigned int)range.minlen,
 				   q->limits.discard_granularity);
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		ret = ext4_trim_fs(sb, &range);
 		if (ret < 0)
 			return ret;

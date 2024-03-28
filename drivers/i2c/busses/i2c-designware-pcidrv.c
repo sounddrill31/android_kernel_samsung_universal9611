@@ -50,10 +50,17 @@ enum dw_pci_ctl_id_t {
 };
 
 struct dw_scl_sda_cfg {
+<<<<<<< HEAD
 	u32 ss_hcnt;
 	u32 fs_hcnt;
 	u32 ss_lcnt;
 	u32 fs_lcnt;
+=======
+	u16 ss_hcnt;
+	u16 fs_hcnt;
+	u16 ss_lcnt;
+	u16 fs_lcnt;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	u32 sda_hold;
 };
 

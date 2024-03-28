@@ -669,6 +669,7 @@ static int pccardd(void *__skt)
 		if (events || sysfs_events)
 			continue;
 
+<<<<<<< HEAD
 		if (kthread_should_stop())
 			break;
 
@@ -681,6 +682,18 @@ static int pccardd(void *__skt)
 
 		try_to_freeze();
 	}
+=======
+		set_current_state(TASK_INTERRUPTIBLE);
+		if (kthread_should_stop())
+			break;
+
+		schedule();
+
+		try_to_freeze();
+	}
+	/* make sure we are running before we exit */
+	__set_current_state(TASK_RUNNING);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	/* shut down socket, if a device is still present */
 	if (skt->state & SOCKET_PRESENT) {

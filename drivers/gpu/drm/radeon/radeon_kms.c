@@ -655,6 +655,11 @@ void radeon_driver_lastclose_kms(struct drm_device *dev)
 int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 {
 	struct radeon_device *rdev = dev->dev_private;
+<<<<<<< HEAD
+=======
+	struct radeon_fpriv *fpriv;
+	struct radeon_vm *vm;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	int r;
 
 	file_priv->driver_priv = NULL;
@@ -667,18 +672,26 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 
 	/* new gpu have virtual address space support */
 	if (rdev->family >= CHIP_CAYMAN) {
+<<<<<<< HEAD
 		struct radeon_fpriv *fpriv;
 		struct radeon_vm *vm;
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 		fpriv = kzalloc(sizeof(*fpriv), GFP_KERNEL);
 		if (unlikely(!fpriv)) {
 			r = -ENOMEM;
+<<<<<<< HEAD
 			goto out_suspend;
+=======
+			goto err_suspend;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		}
 
 		if (rdev->accel_working) {
 			vm = &fpriv->vm;
 			r = radeon_vm_init(rdev, vm);
+<<<<<<< HEAD
 			if (r) {
 				kfree(fpriv);
 				goto out_suspend;
@@ -690,25 +703,59 @@ int radeon_driver_open_kms(struct drm_device *dev, struct drm_file *file_priv)
 				kfree(fpriv);
 				goto out_suspend;
 			}
+=======
+			if (r)
+				goto err_fpriv;
+
+			r = radeon_bo_reserve(rdev->ring_tmp_bo.bo, false);
+			if (r)
+				goto err_vm_fini;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 			/* map the ib pool buffer read only into
 			 * virtual address space */
 			vm->ib_bo_va = radeon_vm_bo_add(rdev, vm,
 							rdev->ring_tmp_bo.bo);
+<<<<<<< HEAD
+=======
+			if (!vm->ib_bo_va) {
+				r = -ENOMEM;
+				goto err_vm_fini;
+			}
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			r = radeon_vm_bo_set_addr(rdev, vm->ib_bo_va,
 						  RADEON_VA_IB_OFFSET,
 						  RADEON_VM_PAGE_READABLE |
 						  RADEON_VM_PAGE_SNOOPED);
+<<<<<<< HEAD
 			if (r) {
 				radeon_vm_fini(rdev, vm);
 				kfree(fpriv);
 				goto out_suspend;
 			}
+=======
+			if (r)
+				goto err_vm_fini;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		}
 		file_priv->driver_priv = fpriv;
 	}
 
+<<<<<<< HEAD
 out_suspend:
+=======
+	pm_runtime_mark_last_busy(dev->dev);
+	pm_runtime_put_autosuspend(dev->dev);
+	return 0;
+
+err_vm_fini:
+	radeon_vm_fini(rdev, vm);
+err_fpriv:
+	kfree(fpriv);
+
+err_suspend:
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	pm_runtime_mark_last_busy(dev->dev);
 	pm_runtime_put_autosuspend(dev->dev);
 	return r;

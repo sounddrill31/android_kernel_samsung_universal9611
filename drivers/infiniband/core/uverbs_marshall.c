@@ -66,7 +66,11 @@ void ib_copy_ah_attr_to_user(struct ib_device *device,
 	struct rdma_ah_attr *src = ah_attr;
 	struct rdma_ah_attr conv_ah;
 
+<<<<<<< HEAD
 	memset(&dst->grh.reserved, 0, sizeof(dst->grh.reserved));
+=======
+	memset(&dst->grh, 0, sizeof(dst->grh));
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if ((ah_attr->type == RDMA_AH_ATTR_TYPE_OPA) &&
 	    (rdma_ah_get_dlid(ah_attr) >=

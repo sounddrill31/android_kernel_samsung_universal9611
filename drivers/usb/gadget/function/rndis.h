@@ -178,6 +178,10 @@ typedef struct rndis_params {
 	void			(*resp_avail)(void *v);
 	void			*v;
 	struct list_head	resp_queue;
+<<<<<<< HEAD
+=======
+	spinlock_t		resp_lock;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 } rndis_params;
 
 /* RNDIS Message parser and other useless functions */

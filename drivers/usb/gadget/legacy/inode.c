@@ -1833,8 +1833,14 @@ dev_config (struct file *fd, const char __user *buf, size_t len, loff_t *ptr)
 	spin_lock_irq (&dev->lock);
 	value = -EINVAL;
 	if (dev->buf) {
+<<<<<<< HEAD
 		kfree(kbuf);
 		goto fail;
+=======
+		spin_unlock_irq(&dev->lock);
+		kfree(kbuf);
+		return value;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 	dev->buf = kbuf;
 
@@ -1881,8 +1887,13 @@ dev_config (struct file *fd, const char __user *buf, size_t len, loff_t *ptr)
 
 	value = usb_gadget_probe_driver(&gadgetfs_driver);
 	if (value != 0) {
+<<<<<<< HEAD
 		kfree (dev->buf);
 		dev->buf = NULL;
+=======
+		spin_lock_irq(&dev->lock);
+		goto fail;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	} else {
 		/* at this point "good" hardware has for the first time
 		 * let the USB the host see us.  alternatively, if users
@@ -1899,6 +1910,12 @@ dev_config (struct file *fd, const char __user *buf, size_t len, loff_t *ptr)
 	return value;
 
 fail:
+<<<<<<< HEAD
+=======
+	dev->config = NULL;
+	dev->hs_config = NULL;
+	dev->dev = NULL;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	spin_unlock_irq (&dev->lock);
 	pr_debug ("%s: %s fail %zd, %p\n", shortname, __func__, value, dev);
 	kfree (dev->buf);

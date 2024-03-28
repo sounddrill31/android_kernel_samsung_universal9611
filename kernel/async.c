@@ -191,9 +191,12 @@ static async_cookie_t __async_schedule(async_func_t func, void *data, struct asy
 	atomic_inc(&entry_count);
 	spin_unlock_irqrestore(&async_lock, flags);
 
+<<<<<<< HEAD
 	/* mark that this task has queued an async job, used by module init */
 	current->flags |= PF_USED_ASYNC;
 
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	/* schedule for execution */
 	queue_work(system_unbound_wq, &entry->work);
 

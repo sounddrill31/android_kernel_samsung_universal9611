@@ -148,6 +148,10 @@ config HID_APPLEIR
 
 config HID_ASUS
 	tristate "Asus"
+<<<<<<< HEAD
+=======
+	depends on USB_HID
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	depends on LEDS_CLASS
 	---help---
 	Support for Asus notebook built-in keyboard and touchpad via i2c, and

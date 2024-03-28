@@ -1364,7 +1364,11 @@ static int iwl_mvm_check_running_scans(struct iwl_mvm *mvm, int type)
 	return -EIO;
 }
 
+<<<<<<< HEAD
 #define SCAN_TIMEOUT 20000
+=======
+#define SCAN_TIMEOUT 30000
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 void iwl_mvm_scan_timeout_wk(struct work_struct *work)
 {

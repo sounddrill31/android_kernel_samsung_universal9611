@@ -167,7 +167,11 @@
 /* Maximum status buffer size in bytes of interrupt URB. */
 #define UVC_MAX_STATUS_SIZE	16
 
+<<<<<<< HEAD
 #define UVC_CTRL_CONTROL_TIMEOUT	500
+=======
+#define UVC_CTRL_CONTROL_TIMEOUT	5000
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 #define UVC_CTRL_STREAMING_TIMEOUT	5000
 
 /* Maximum allowed number of control mappings per device */

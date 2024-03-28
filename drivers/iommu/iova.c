@@ -68,8 +68,12 @@ static void free_iova_flush_queue(struct iova_domain *iovad)
 	if (!has_iova_flush_queue(iovad))
 		return;
 
+<<<<<<< HEAD
 	if (timer_pending(&iovad->fq_timer))
 		del_timer(&iovad->fq_timer);
+=======
+	del_timer_sync(&iovad->fq_timer);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	fq_destroy_all_entries(iovad);
 

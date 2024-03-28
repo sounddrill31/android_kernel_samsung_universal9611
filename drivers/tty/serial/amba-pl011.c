@@ -2112,6 +2112,7 @@ static const char *pl011_type(struct uart_port *port)
 }
 
 /*
+<<<<<<< HEAD
  * Release the memory region(s) being used by 'port'
  */
 static void pl011_release_port(struct uart_port *port)
@@ -2129,14 +2130,21 @@ static int pl011_request_port(struct uart_port *port)
 }
 
 /*
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
  * Configure/autoconfigure the port.
  */
 static void pl011_config_port(struct uart_port *port, int flags)
 {
+<<<<<<< HEAD
 	if (flags & UART_CONFIG_TYPE) {
 		port->type = PORT_AMBA;
 		pl011_request_port(port);
 	}
+=======
+	if (flags & UART_CONFIG_TYPE)
+		port->type = PORT_AMBA;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 /*
@@ -2151,6 +2159,11 @@ static int pl011_verify_port(struct uart_port *port, struct serial_struct *ser)
 		ret = -EINVAL;
 	if (ser->baud_base < 9600)
 		ret = -EINVAL;
+<<<<<<< HEAD
+=======
+	if (port->mapbase != (unsigned long) ser->iomem_base)
+		ret = -EINVAL;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	return ret;
 }
 
@@ -2168,8 +2181,11 @@ static const struct uart_ops amba_pl011_pops = {
 	.flush_buffer	= pl011_dma_flush_buffer,
 	.set_termios	= pl011_set_termios,
 	.type		= pl011_type,
+<<<<<<< HEAD
 	.release_port	= pl011_release_port,
 	.request_port	= pl011_request_port,
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	.config_port	= pl011_config_port,
 	.verify_port	= pl011_verify_port,
 #ifdef CONFIG_CONSOLE_POLL
@@ -2199,8 +2215,11 @@ static const struct uart_ops sbsa_uart_pops = {
 	.shutdown	= sbsa_uart_shutdown,
 	.set_termios	= sbsa_uart_set_termios,
 	.type		= pl011_type,
+<<<<<<< HEAD
 	.release_port	= pl011_release_port,
 	.request_port	= pl011_request_port,
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	.config_port	= pl011_config_port,
 	.verify_port	= pl011_verify_port,
 #ifdef CONFIG_CONSOLE_POLL

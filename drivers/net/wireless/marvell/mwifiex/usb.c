@@ -130,7 +130,12 @@ static int mwifiex_usb_recv(struct mwifiex_adapter *adapter,
 		default:
 			mwifiex_dbg(adapter, ERROR,
 				    "unknown recv_type %#x\n", recv_type);
+<<<<<<< HEAD
 			return -1;
+=======
+			ret = -1;
+			goto exit_restore_skb;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		}
 		break;
 	case MWIFIEX_USB_EP_DATA:

@@ -31,7 +31,11 @@ struct tee_device;
  * @paddr:	physical address of the shared memory
  * @kaddr:	virtual address of the shared memory
  * @size:	size of shared memory
+<<<<<<< HEAD
  * @dmabuf:	dmabuf used to for exporting to user space
+=======
+ * @refcount:	reference counter
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
  * @flags:	defined by TEE_SHM_* in tee_drv.h
  * @id:		unique id of a shared memory object on this device
  */
@@ -42,7 +46,11 @@ struct tee_shm {
 	phys_addr_t paddr;
 	void *kaddr;
 	size_t size;
+<<<<<<< HEAD
 	struct dma_buf *dmabuf;
+=======
+	refcount_t refcount;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	u32 flags;
 	int id;
 };

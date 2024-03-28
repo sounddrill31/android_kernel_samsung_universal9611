@@ -768,8 +768,15 @@ static int _init_clkctrl_providers(void)
 
 	for_each_matching_node(np, ti_clkctrl_match_table) {
 		ret = _setup_clkctrl_provider(np);
+<<<<<<< HEAD
 		if (ret)
 			break;
+=======
+		if (ret) {
+			of_node_put(np);
+			break;
+		}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 
 	return ret;

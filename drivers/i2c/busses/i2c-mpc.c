@@ -107,11 +107,16 @@ static irqreturn_t mpc_i2c_isr(int irq, void *dev_id)
 /* Sometimes 9th clock pulse isn't generated, and slave doesn't release
  * the bus, because it wants to send ACK.
  * Following sequence of enabling/disabling and sending start/stop generates
+<<<<<<< HEAD
  * the 9 pulses, so it's all OK.
+=======
+ * the 9 pulses, each with a START then ending with STOP, so it's all OK.
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
  */
 static void mpc_i2c_fixup(struct mpc_i2c *i2c)
 {
 	int k;
+<<<<<<< HEAD
 	u32 delay_val = 1000000 / i2c->real_clk + 1;
 
 	if (delay_val < 2)
@@ -124,6 +129,27 @@ static void mpc_i2c_fixup(struct mpc_i2c *i2c)
 		writeccr(i2c, CCR_MEN);
 		udelay(delay_val << 1);
 	}
+=======
+	unsigned long flags;
+
+	for (k = 9; k; k--) {
+		writeccr(i2c, 0);
+		writeb(0, i2c->base + MPC_I2C_SR); /* clear any status bits */
+		writeccr(i2c, CCR_MEN | CCR_MSTA); /* START */
+		readb(i2c->base + MPC_I2C_DR); /* init xfer */
+		udelay(15); /* let it hit the bus */
+		local_irq_save(flags); /* should not be delayed further */
+		writeccr(i2c, CCR_MEN | CCR_MSTA | CCR_RSTA); /* delay SDA */
+		readb(i2c->base + MPC_I2C_DR);
+		if (k != 1)
+			udelay(5);
+		local_irq_restore(flags);
+	}
+	writeccr(i2c, CCR_MEN); /* Initiate STOP */
+	readb(i2c->base + MPC_I2C_DR);
+	udelay(15); /* Let STOP propagate */
+	writeccr(i2c, 0);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 static int i2c_wait(struct mpc_i2c *i2c, unsigned timeout, int writing)

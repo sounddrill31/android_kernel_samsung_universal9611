@@ -1704,7 +1704,10 @@ out:
 		kthread_stop(c->bgt);
 		c->bgt = NULL;
 	}
+<<<<<<< HEAD
 	free_wbufs(c);
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	kfree(c->write_reserve_buf);
 	c->write_reserve_buf = NULL;
 	vfree(c->ileb_buf);

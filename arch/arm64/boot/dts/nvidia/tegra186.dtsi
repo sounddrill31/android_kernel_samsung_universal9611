@@ -351,7 +351,11 @@
 
 	ccplex@e000000 {
 		compatible = "nvidia,tegra186-ccplex-cluster";
+<<<<<<< HEAD
 		reg = <0x0 0x0e000000 0x0 0x3fffff>;
+=======
+		reg = <0x0 0x0e000000 0x0 0x400000>;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 		nvidia,bpmp = <&bpmp>;
 	};

@@ -450,7 +450,11 @@ static unsigned long shmem_unused_huge_shrink(struct shmem_sb_info *sbinfo,
 	struct shmem_inode_info *info;
 	struct page *page;
 	unsigned long batch = sc ? sc->nr_to_scan : 128;
+<<<<<<< HEAD
 	int removed = 0, split = 0;
+=======
+	int split = 0;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if (list_empty(&sbinfo->shrinklist))
 		return SHRINK_STOP;
@@ -465,7 +469,10 @@ static unsigned long shmem_unused_huge_shrink(struct shmem_sb_info *sbinfo,
 		/* inode is about to be evicted */
 		if (!inode) {
 			list_del_init(&info->shrinklist);
+<<<<<<< HEAD
 			removed++;
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			goto next;
 		}
 
@@ -473,12 +480,19 @@ static unsigned long shmem_unused_huge_shrink(struct shmem_sb_info *sbinfo,
 		if (round_up(inode->i_size, PAGE_SIZE) ==
 				round_up(inode->i_size, HPAGE_PMD_SIZE)) {
 			list_move(&info->shrinklist, &to_remove);
+<<<<<<< HEAD
 			removed++;
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			goto next;
 		}
 
 		list_move(&info->shrinklist, &list);
 next:
+<<<<<<< HEAD
+=======
+		sbinfo->shrinklist_len--;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		if (!--batch)
 			break;
 	}
@@ -498,7 +512,11 @@ next:
 		inode = &info->vfs_inode;
 
 		if (nr_to_split && split >= nr_to_split)
+<<<<<<< HEAD
 			goto leave;
+=======
+			goto move_back;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 		page = find_get_page(inode->i_mapping,
 				(inode->i_size & HPAGE_PMD_MASK) >> PAGE_SHIFT);
@@ -512,28 +530,44 @@ next:
 		}
 
 		/*
+<<<<<<< HEAD
 		 * Leave the inode on the list if we failed to lock
 		 * the page at this time.
+=======
+		 * Move the inode on the list back to shrinklist if we failed
+		 * to lock the page at this time.
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		 *
 		 * Waiting for the lock may lead to deadlock in the
 		 * reclaim path.
 		 */
 		if (!trylock_page(page)) {
 			put_page(page);
+<<<<<<< HEAD
 			goto leave;
+=======
+			goto move_back;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		}
 
 		ret = split_huge_page(page);
 		unlock_page(page);
 		put_page(page);
 
+<<<<<<< HEAD
 		/* If split failed leave the inode on the list */
 		if (ret)
 			goto leave;
+=======
+		/* If split failed move the inode on the list back to shrinklist */
+		if (ret)
+			goto move_back;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 		split++;
 drop:
 		list_del_init(&info->shrinklist);
+<<<<<<< HEAD
 		removed++;
 leave:
 		iput(inode);
@@ -544,6 +578,24 @@ leave:
 	sbinfo->shrinklist_len -= removed;
 	spin_unlock(&sbinfo->shrinklist_lock);
 
+=======
+		goto put;
+move_back:
+		/*
+		 * Make sure the inode is either on the global list or deleted
+		 * from any local list before iput() since it could be deleted
+		 * in another thread once we put the inode (then the local list
+		 * is corrupted).
+		 */
+		spin_lock(&sbinfo->shrinklist_lock);
+		list_move(&info->shrinklist, &sbinfo->shrinklist);
+		sbinfo->shrinklist_len++;
+		spin_unlock(&sbinfo->shrinklist_lock);
+put:
+		iput(inode);
+	}
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	return split;
 }
 
@@ -2711,7 +2763,12 @@ static void shmem_tag_pins(struct address_space *mapping)
 				slot = radix_tree_iter_retry(&iter);
 				continue;
 			}
+<<<<<<< HEAD
 		} else if (page_count(page) - page_mapcount(page) > 1) {
+=======
+		} else if (!PageTail(page) && page_count(page) !=
+			   hpage_nr_pages(page) + total_mapcount(page)) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			radix_tree_tag_set(&mapping->page_tree, iter.index,
 					   SHMEM_TAG_PINNED);
 		}
@@ -2771,8 +2828,13 @@ static int shmem_wait_for_pins(struct address_space *mapping)
 				page = NULL;
 			}
 
+<<<<<<< HEAD
 			if (page &&
 			    page_count(page) - page_mapcount(page) != 1) {
+=======
+			if (page && page_count(page) !=
+			    hpage_nr_pages(page) + total_mapcount(page)) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 				if (scan < LAST_SCAN)
 					goto continue_resched;
 

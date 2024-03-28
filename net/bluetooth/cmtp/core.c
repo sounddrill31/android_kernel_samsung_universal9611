@@ -499,9 +499,13 @@ static int __init cmtp_init(void)
 {
 	BT_INFO("CMTP (CAPI Emulation) ver %s", VERSION);
 
+<<<<<<< HEAD
 	cmtp_init_sockets();
 
 	return 0;
+=======
+	return cmtp_init_sockets();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 static void __exit cmtp_exit(void)

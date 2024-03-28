@@ -740,11 +740,16 @@ int nfs_getattr(const struct path *path, struct kstat *stat,
 
 	trace_nfs_getattr_enter(inode);
 	/* Flush out writes to the server in order to update c/mtime.  */
+<<<<<<< HEAD
 	if (S_ISREG(inode->i_mode)) {
 		err = filemap_write_and_wait(inode->i_mapping);
 		if (err)
 			goto out;
 	}
+=======
+	if (S_ISREG(inode->i_mode))
+		filemap_write_and_wait(inode->i_mapping);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	/*
 	 * We may force a getattr if the user cares about atime.
@@ -775,7 +780,11 @@ int nfs_getattr(const struct path *path, struct kstat *stat,
 		if (S_ISDIR(inode->i_mode))
 			stat->blksize = NFS_SERVER(inode)->dtsize;
 	}
+<<<<<<< HEAD
 out:
+=======
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	trace_nfs_getattr_exit(inode, err);
 	return err;
 }

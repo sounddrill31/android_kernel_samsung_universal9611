@@ -158,6 +158,12 @@ void ath10k_htt_tx_dec_pending(struct ath10k_htt *htt)
 	htt->num_pending_tx--;
 	if (htt->num_pending_tx == htt->max_num_pending_tx - 1)
 		ath10k_mac_tx_unlock(htt->ar, ATH10K_TX_PAUSE_Q_FULL);
+<<<<<<< HEAD
+=======
+
+	if (htt->num_pending_tx == 0)
+		wake_up(&htt->empty_tx_wq);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 int ath10k_htt_tx_inc_pending(struct ath10k_htt *htt)

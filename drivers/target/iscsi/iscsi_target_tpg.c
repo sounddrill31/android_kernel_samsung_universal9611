@@ -448,6 +448,12 @@ static bool iscsit_tpg_check_network_portal(
 				break;
 		}
 		spin_unlock(&tpg->tpg_np_lock);
+<<<<<<< HEAD
+=======
+
+		if (match)
+			break;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	}
 	spin_unlock(&tiqn->tiqn_tpg_lock);
 

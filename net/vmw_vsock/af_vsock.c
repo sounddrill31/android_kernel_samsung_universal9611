@@ -1237,6 +1237,10 @@ static int vsock_stream_connect(struct socket *sock, struct sockaddr *addr,
 			sk->sk_state = sk->sk_state == TCP_ESTABLISHED ? TCP_CLOSING : TCP_CLOSE;
 			sock->state = SS_UNCONNECTED;
 			vsock_transport_cancel_pkt(vsk);
+<<<<<<< HEAD
+=======
+			vsock_remove_connected(vsk);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			goto out_wait;
 		} else if (timeout == 0) {
 			err = -ETIMEDOUT;

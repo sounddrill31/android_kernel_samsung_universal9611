@@ -3423,8 +3423,15 @@ nfsd4_setclientid_confirm(struct svc_rqst *rqstp,
 			status = nfserr_clid_inuse;
 			if (client_has_state(old)
 					&& !same_creds(&unconf->cl_cred,
+<<<<<<< HEAD
 							&old->cl_cred))
 				goto out;
+=======
+							&old->cl_cred)) {
+				old = NULL;
+				goto out;
+			}
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			status = mark_client_expired_locked(old);
 			if (status) {
 				old = NULL;

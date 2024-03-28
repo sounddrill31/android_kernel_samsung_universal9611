@@ -498,11 +498,19 @@ static void read_bulk_callback(struct urb *urb)
 		goto goon;
 
 	rx_status = buf[count - 2];
+<<<<<<< HEAD
 	if (rx_status & 0x1e) {
 		netif_dbg(pegasus, rx_err, net,
 			  "RX packet error %x\n", rx_status);
 		net->stats.rx_errors++;
 		if (rx_status & 0x06)	/* long or runt	*/
+=======
+	if (rx_status & 0x1c) {
+		netif_dbg(pegasus, rx_err, net,
+			  "RX packet error %x\n", rx_status);
+		net->stats.rx_errors++;
+		if (rx_status & 0x04)	/* runt	*/
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			net->stats.rx_length_errors++;
 		if (rx_status & 0x08)
 			net->stats.rx_crc_errors++;

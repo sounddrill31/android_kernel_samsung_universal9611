@@ -230,6 +230,13 @@ __setup("trace_clock=", set_trace_boot_clock);
 
 static int __init set_tracepoint_printk(char *str)
 {
+<<<<<<< HEAD
+=======
+	/* Ignore the "tp_printk_stop_on_boot" param */
+	if (*str == '_')
+		return 0;
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if ((strcmp(str, "=0") != 0 && strcmp(str, "=off") != 0))
 		tracepoint_printk = 1;
 	return 1;
@@ -2810,7 +2817,11 @@ struct trace_buffer_struct {
 	char buffer[4][TRACE_BUF_SIZE];
 };
 
+<<<<<<< HEAD
 static struct trace_buffer_struct *trace_percpu_buffer;
+=======
+static struct trace_buffer_struct __percpu *trace_percpu_buffer;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 /*
  * Thise allows for lockless recording.  If we're nested too deeply, then
@@ -2820,7 +2831,11 @@ static char *get_trace_buf(void)
 {
 	struct trace_buffer_struct *buffer = this_cpu_ptr(trace_percpu_buffer);
 
+<<<<<<< HEAD
 	if (!buffer || buffer->nesting >= 4)
+=======
+	if (!trace_percpu_buffer || buffer->nesting >= 4)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		return NULL;
 
 	buffer->nesting++;
@@ -2839,7 +2854,11 @@ static void put_trace_buf(void)
 
 static int alloc_percpu_trace_buffer(void)
 {
+<<<<<<< HEAD
 	struct trace_buffer_struct *buffers;
+=======
+	struct trace_buffer_struct __percpu *buffers;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	buffers = alloc_percpu(struct trace_buffer_struct);
 	if (WARN(!buffers, "Could not allocate percpu trace_printk buffer"))

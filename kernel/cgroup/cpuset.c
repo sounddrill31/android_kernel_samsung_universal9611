@@ -1535,6 +1535,10 @@ static void cpuset_attach(struct cgroup_taskset *tset)
 	cgroup_taskset_first(tset, &css);
 	cs = css_cs(css);
 
+<<<<<<< HEAD
+=======
+	cpus_read_lock();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	mutex_lock(&cpuset_mutex);
 
 	/* prepare for attach */
@@ -1590,6 +1594,10 @@ static void cpuset_attach(struct cgroup_taskset *tset)
 		wake_up(&cpuset_attach_wq);
 
 	mutex_unlock(&cpuset_mutex);
+<<<<<<< HEAD
+=======
+	cpus_read_unlock();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 }
 
 /* The various types of files and directories in a cpuset file system */

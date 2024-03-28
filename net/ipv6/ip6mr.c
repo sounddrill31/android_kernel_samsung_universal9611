@@ -252,7 +252,13 @@ static int __net_init ip6mr_rules_init(struct net *net)
 	return 0;
 
 err2:
+<<<<<<< HEAD
 	ip6mr_free_table(mrt);
+=======
+	rtnl_lock();
+	ip6mr_free_table(mrt);
+	rtnl_unlock();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 err1:
 	fib_rules_unregister(ops);
 	return err;

@@ -795,7 +795,11 @@ void notrace handle_interruption(int code, struct pt_regs *regs)
 	     * unless pagefault_disable() was called before.
 	     */
 
+<<<<<<< HEAD
 	    if (fault_space == 0 && !faulthandler_disabled())
+=======
+	    if (faulthandler_disabled() || fault_space == 0)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	    {
 		/* Clean up and return if in exception table. */
 		if (fixup_exception(regs))

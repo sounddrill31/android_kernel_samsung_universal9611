@@ -155,22 +155,40 @@ static bool batadv_is_on_batman_iface(const struct net_device *net_dev)
 	struct net *net = dev_net(net_dev);
 	struct net_device *parent_dev;
 	struct net *parent_net;
+<<<<<<< HEAD
+=======
+	int iflink;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	bool ret;
 
 	/* check if this is a batman-adv mesh interface */
 	if (batadv_softif_is_valid(net_dev))
 		return true;
 
+<<<<<<< HEAD
 	/* no more parents..stop recursion */
 	if (dev_get_iflink(net_dev) == 0 ||
 	    dev_get_iflink(net_dev) == net_dev->ifindex)
+=======
+	iflink = dev_get_iflink(net_dev);
+	if (iflink == 0)
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		return false;
 
 	parent_net = batadv_getlink_net(net_dev, net);
 
+<<<<<<< HEAD
 	/* recurse over the parent device */
 	parent_dev = __dev_get_by_index((struct net *)parent_net,
 					dev_get_iflink(net_dev));
+=======
+	/* iflink to itself, most likely physical device */
+	if (net == parent_net && iflink == net_dev->ifindex)
+		return false;
+
+	/* recurse over the parent device */
+	parent_dev = __dev_get_by_index((struct net *)parent_net, iflink);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	/* if we got a NULL parent_dev there is something broken.. */
 	if (!parent_dev) {
 		pr_err("Cannot find parent device\n");
@@ -220,14 +238,23 @@ static struct net_device *batadv_get_real_netdevice(struct net_device *netdev)
 	struct net_device *real_netdev = NULL;
 	struct net *real_net;
 	struct net *net;
+<<<<<<< HEAD
 	int ifindex;
+=======
+	int iflink;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	ASSERT_RTNL();
 
 	if (!netdev)
 		return NULL;
 
+<<<<<<< HEAD
 	if (netdev->ifindex == dev_get_iflink(netdev)) {
+=======
+	iflink = dev_get_iflink(netdev);
+	if (iflink == 0) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		dev_hold(netdev);
 		return netdev;
 	}
@@ -237,9 +264,22 @@ static struct net_device *batadv_get_real_netdevice(struct net_device *netdev)
 		goto out;
 
 	net = dev_net(hard_iface->soft_iface);
+<<<<<<< HEAD
 	ifindex = dev_get_iflink(netdev);
 	real_net = batadv_getlink_net(netdev, net);
 	real_netdev = dev_get_by_index(real_net, ifindex);
+=======
+	real_net = batadv_getlink_net(netdev, net);
+
+	/* iflink to itself, most likely physical device */
+	if (net == real_net && netdev->ifindex == iflink) {
+		real_netdev = netdev;
+		dev_hold(real_netdev);
+		goto out;
+	}
+
+	real_netdev = dev_get_by_index(real_net, iflink);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 out:
 	if (hard_iface)

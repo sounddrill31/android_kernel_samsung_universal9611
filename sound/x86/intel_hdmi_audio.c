@@ -1308,7 +1308,11 @@ static int had_pcm_mmap(struct snd_pcm_substream *substream,
 {
 	vma->vm_page_prot = pgprot_noncached(vma->vm_page_prot);
 	return remap_pfn_range(vma, vma->vm_start,
+<<<<<<< HEAD
 			substream->dma_buffer.addr >> PAGE_SHIFT,
+=======
+			substream->runtime->dma_addr >> PAGE_SHIFT,
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			vma->vm_end - vma->vm_start, vma->vm_page_prot);
 }
 

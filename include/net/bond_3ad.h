@@ -265,7 +265,11 @@ struct ad_system {
 
 struct ad_bond_info {
 	struct ad_system system;	/* 802.3ad system structure */
+<<<<<<< HEAD
 	u32 agg_select_timer;		/* Timer to select aggregator after all adapter's hand shakes */
+=======
+	atomic_t agg_select_timer;	/* Timer to select aggregator after all adapter's hand shakes */
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	u16 aggregator_identifier;
 };
 

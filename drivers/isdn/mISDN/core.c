@@ -390,7 +390,11 @@ mISDNInit(void)
 	err = mISDN_inittimer(&debug);
 	if (err)
 		goto error2;
+<<<<<<< HEAD
 	err = l1_init(&debug);
+=======
+	err = Isdnl1_Init(&debug);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	if (err)
 		goto error3;
 	err = Isdnl2_Init(&debug);
@@ -404,7 +408,11 @@ mISDNInit(void)
 error5:
 	Isdnl2_cleanup();
 error4:
+<<<<<<< HEAD
 	l1_cleanup();
+=======
+	Isdnl1_cleanup();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 error3:
 	mISDN_timer_cleanup();
 error2:
@@ -417,7 +425,11 @@ static void mISDN_cleanup(void)
 {
 	misdn_sock_cleanup();
 	Isdnl2_cleanup();
+<<<<<<< HEAD
 	l1_cleanup();
+=======
+	Isdnl1_cleanup();
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	mISDN_timer_cleanup();
 	class_unregister(&mISDN_class);
 

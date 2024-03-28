@@ -672,7 +672,11 @@ axienet_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 	num_frag = skb_shinfo(skb)->nr_frags;
 	cur_p = &lp->tx_bd_v[lp->tx_bd_tail];
 
+<<<<<<< HEAD
 	if (axienet_check_tx_bd_space(lp, num_frag)) {
+=======
+	if (axienet_check_tx_bd_space(lp, num_frag + 1)) {
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		if (netif_queue_stopped(ndev))
 			return NETDEV_TX_BUSY;
 
@@ -682,7 +686,11 @@ axienet_start_xmit(struct sk_buff *skb, struct net_device *ndev)
 		smp_mb();
 
 		/* Space might have just been freed - check again */
+<<<<<<< HEAD
 		if (axienet_check_tx_bd_space(lp, num_frag))
+=======
+		if (axienet_check_tx_bd_space(lp, num_frag + 1))
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			return NETDEV_TX_BUSY;
 
 		netif_wake_queue(ndev);

@@ -722,12 +722,15 @@ static int mmp_pdma_config(struct dma_chan *dchan,
 
 	chan->dir = cfg->direction;
 	chan->dev_addr = addr;
+<<<<<<< HEAD
 	/* FIXME: drivers should be ported over to use the filter
 	 * function. Once that's done, the following two lines can
 	 * be removed.
 	 */
 	if (cfg->slave_id)
 		chan->drcmr = cfg->slave_id;
+=======
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	return 0;
 }

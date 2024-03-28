@@ -137,7 +137,11 @@ struct rxe_opcode_info rxe_opcode[RXE_NUM_OPCODE] = {
 		}
 	},
 	[IB_OPCODE_RC_SEND_MIDDLE]		= {
+<<<<<<< HEAD
 		.name	= "IB_OPCODE_RC_SEND_MIDDLE]",
+=======
+		.name	= "IB_OPCODE_RC_SEND_MIDDLE",
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 		.mask	= RXE_PAYLOAD_MASK | RXE_REQ_MASK | RXE_SEND_MASK
 				| RXE_MIDDLE_MASK,
 		.length = RXE_BTH_BYTES,

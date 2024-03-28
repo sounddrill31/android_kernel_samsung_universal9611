@@ -136,6 +136,12 @@ static int com20020pci_probe(struct pci_dev *pdev,
 		return -ENOMEM;
 
 	ci = (struct com20020_pci_card_info *)id->driver_data;
+<<<<<<< HEAD
+=======
+	if (!ci)
+		return -EINVAL;
+
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 	priv->ci = ci;
 	mm = &ci->misc_map;
 

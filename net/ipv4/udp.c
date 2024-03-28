@@ -2920,7 +2920,11 @@ int udp4_seq_show(struct seq_file *seq, void *v)
 {
 	seq_setwidth(seq, 127);
 	if (v == SEQ_START_TOKEN)
+<<<<<<< HEAD
 		seq_puts(seq, "  sl  local_address rem_address   st tx_queue "
+=======
+		seq_puts(seq, "   sl  local_address rem_address   st tx_queue "
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 			   "rx_queue tr tm->when retrnsmt   uid  timeout "
 			   "inode ref pointer drops");
 	else {

@@ -2985,9 +2985,15 @@ static void snb_wm_latency_quirk(struct drm_i915_private *dev_priv)
 	 * The BIOS provided WM memory latency values are often
 	 * inadequate for high resolution displays. Adjust them.
 	 */
+<<<<<<< HEAD
 	changed = ilk_increase_wm_latency(dev_priv, dev_priv->wm.pri_latency, 12) |
 		ilk_increase_wm_latency(dev_priv, dev_priv->wm.spr_latency, 12) |
 		ilk_increase_wm_latency(dev_priv, dev_priv->wm.cur_latency, 12);
+=======
+	changed = ilk_increase_wm_latency(dev_priv, dev_priv->wm.pri_latency, 12);
+	changed |= ilk_increase_wm_latency(dev_priv, dev_priv->wm.spr_latency, 12);
+	changed |= ilk_increase_wm_latency(dev_priv, dev_priv->wm.cur_latency, 12);
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if (!changed)
 		return;

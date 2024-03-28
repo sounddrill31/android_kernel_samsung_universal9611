@@ -5340,7 +5340,11 @@ static unsigned int selinux_ip_postroute_compat(struct sk_buff *skb,
 	struct common_audit_data ad;
 	struct lsm_network_audit net = {0,};
 	char *addrp;
+<<<<<<< HEAD
 	u8 proto;
+=======
+	u8 proto = 0;
+>>>>>>> 7f08ecfbf357 (Merge tag 'v4.14.270' of https://git.kernel.org/pub/scm/linux/kernel/git/stable/linux into upstream)
 
 	if (sk == NULL)
 		return NF_ACCEPT;
